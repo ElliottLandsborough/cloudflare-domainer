@@ -1,10 +1,15 @@
 import sys
 import json
 #from pprint import pprint # same as print_r e.g pprint(var)
-# python 2 only
-import urllib2 as urllib
-from urllib2 import urlopen
-from urllib2 import Request
+# Python 2 and 3: easiest option
+try:
+    from urllib.parse import urlparse, urlencode
+    from urllib.request import urlopen, Request
+    from urllib.error import HTTPError
+except ImportError:
+    #from urlparse import urlparse
+    from urllib import urlencode
+    from urllib2 import urlopen, Request, HTTPError
 
 def getConfig():
     try:
@@ -23,7 +28,7 @@ def getIpAddress():
         body = urlopen(str(CFG['wtfismyip_api'])).read().decode('utf8') # get url
         data = json.loads(body) # parse json...
         return str(data['YourFuckingIPAddress'])
-    except urllib.HTTPError as e:
+    except HTTPError as e:
         error_message = e.read()
         sys.exit('Something went wrong with ' + CFG['wtfismyip_api'] + ': ' + error_message)
     except ValueError:
@@ -42,7 +47,7 @@ def setCloudFlareIp():
     try:
         response = urlopen(request)
         print(CFG['domain'] + ': ' + ip)
-    except urllib.HTTPError as e:
+    except HTTPError as e:
         error_message = e.read()
         sys.exit('Cloudflare error: ' + error_message)
 
