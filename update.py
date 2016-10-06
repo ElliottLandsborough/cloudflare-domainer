@@ -1,6 +1,6 @@
 import sys
 import json
-from pprint import pprint # same as print_r e.g pprint(var)
+#from pprint import pprint # same as print_r e.g pprint(var)
 # python 2 only
 import urllib2 as urllib
 from urllib2 import urlopen
