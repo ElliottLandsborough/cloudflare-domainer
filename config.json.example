@@ -1,0 +1,8 @@
+{
+  "wtfismyip_api": "https://wtfismyip.com/json",
+  "cloudflare_key": "abc...",
+  "cloudflare_zone_id": "def...",
+  "cloudflare_record_id": "ghi...",
+  "cloudflare_email": "example@domain.com",
+  "domain": "subdomain.example.com"
+}
